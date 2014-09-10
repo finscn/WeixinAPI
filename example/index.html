@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="-1" />
+<meta http-equiv="Cache-Control" content="no-cache" />
+
+  <meta charset="utf-8">
+  <title>Weixin Test</title>
+
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0" />
+
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-touch-fullscreen" content="yes" />
+  <meta name="full-screen" content="yes"/>
+  <meta name="screen-orientation" content="portrait"/>
+  <meta name="x5-fullscreen" content="true"/>
+  <meta name="360-fullscreen" content="true"/>
+
+<style>
+button {
+  height: 36px;
+  margin:6px;
+  font-size:14px;
+  line-height: 16px;
+}
+</style>
+
+<script type="text/javascript">
+document.write('<scr'+'ipt src="../src/WeixinAPI.js?_t='+Date.now()+'"></sc'+'ript>')
+document.write('<scr'+'ipt src="test.js?_t='+Date.now()+'"></sc'+'ript>')
+</script>
+<script type="text/javascript">
+
+
+</script>
+</head>
+<body>
+<div id="weixinState">Loading...</div>
+  <p>
+    <button id="getNetworkType">获取网络状态</button><span id="networkType"></span>
+  </p>
+  <p>
+    <button id="showOptionMenu">显示网页右上角的按钮</button>
+    <button id="hideOptionMenu">隐藏网页右上角的按钮钮</button>
+  </p>
+  <p>
+    <button id="showToolbar">显示底部工具栏</button>
+    <button id="hideToolbar">隐藏底部工具栏</button>
+  </p>
+  <p>
+    <button id="previewImages">使用微信的图片查看工具查看远程图片集</button>
+  </p>
+  <p>
+    <button id="closeWindow">关闭当前微信WebView页面</button>
+  </p>
+
+</body>
+</html>
