@@ -1,4 +1,3 @@
-
 /**
  微信API封装, finscn ( @大城小胖 ) 版.
     参考了  https://github.com/zxlie/WeixinApi
@@ -206,18 +205,17 @@ WeixinAPI.prototype = {
                     type: 分享操作回调事件的类型: succeed,fail,cancel
 
             如果callback为如下格式, 则相当于分别指定相应回调:
-            {
-                succeed: function(resp, action, type){},   // 分享成功
-                fail: function(resp, action, type){},      // 分享失败
-                cancel: function(resp, action, type){},    // 分享取消
-                complete: function(resp, action, type){},  //通用回调函数
+                {
+                    succeed: function(resp, action, type){},   // 分享成功
+                    fail: function(resp, action, type){},      // 分享失败
+                    cancel: function(resp, action, type){},    // 分享取消
+                    complete: function(resp, action, type){},  //通用回调函数
 
-                ready: function(data, action){},     // 同步分享准备就绪
+                    ready: function(data, action){},     // 同步分享准备就绪
 
-                ready: function(data, action, doShare){},     // 异步分享准备就绪
-                //异步时, 需要在 ready里主动调用 doShare函数.
-
-            }
+                    ready: function(data, action, doShare){},     // 异步分享准备就绪
+                    //异步时, 需要在 ready里主动调用 doShare函数.
+                }
     */
 
     // 设置 所有分享操作 所使用的数据, 以及回调函数. 若要移除, 设置为null
@@ -263,15 +261,15 @@ WeixinAPI.prototype = {
         if (callback && typeof callback == 'function') {
             WeixinJSBridge.invoke('getNetworkType', {}, function(resp) {
                 var type = resp.err_msg;
-                var idx=0;
-                var preix="network_type:";
-                if (type && type.indexOf(preix)==0){
-                    type=type.substring(preix.length);
+                //  network_type:wifi     wifi
+                //  network_type:edge     edge
+                //  network_type:wwan     2G/3G
+                //  network_type:fail     网络断开
+                var idx = 0;
+                var preix = "network_type:";
+                if (type && type.indexOf(preix) == 0) {
+                    type = type.substring(preix.length);
                 }
-                //   network_type:wifi     wifi
-                //   network_type:edge     edge
-                //   network_type:wwan     2G/3G
-                //   network_type:fail     网络断开
                 callback(type);
             });
         }
