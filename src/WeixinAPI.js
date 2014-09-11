@@ -53,7 +53,7 @@ WeixinAPI.prototype = {
             Me.onReady();
         };
         if (typeof WeixinJSBridge == "undefined") {
-            document.addEventListener('WeixinJSBridgeReady', callback, false);
+            document.addEventListener("WeixinJSBridgeReady", callback, false);
             setTimeout(function() {
                 if (typeof WeixinJSBridge == "undefined") {
                     Me.onTimeout();
@@ -79,30 +79,30 @@ WeixinAPI.prototype = {
     _initShareListeners: function() {
         var Me = this;
         // iOS微信5.4开始,只支持 general share
-        WeixinJSBridge.on('menu:general:share', function(general) {
-            Me._invokeGeneral('generalShare', general);
+        WeixinJSBridge.on("menu:general:share", function(general) {
+            Me._invokeGeneral("generalShare", general);
         });
         // 以下3个事件只在微信5.4之前版本以及部分Android版本可用
-        WeixinJSBridge.on('menu:share:appmessage', function() {
-            Me._invoke('sendAppMessage');
+        WeixinJSBridge.on("menu:share:appmessage", function() {
+            Me._invoke("sendAppMessage");
         });
-        WeixinJSBridge.on('menu:share:timeline', function() {
-            Me._invoke('shareTimeline');
+        WeixinJSBridge.on("menu:share:timeline", function() {
+            Me._invoke("shareTimeline");
         });
-        WeixinJSBridge.on('menu:share:weibo', function() {
-            Me._invoke('shareWeibo');
+        WeixinJSBridge.on("menu:share:weibo", function() {
+            Me._invoke("shareWeibo");
         });
     },
 
     _invokeCallBack: function(action, resp, callback) {
-        var msg = resp.err_msg;
+        var msg = resp["err_msg"];
         var type;
         if (/:cancel$/.test(msg)) {
-            type = 'cancel';
+            type = "cancel";
         } else if (/:ok$/.test(msg)) {
-            type = 'succeed';
+            type = "succeed";
         } else if (/:fail$/.test(msg)) {
-            type = 'fail';
+            type = "fail";
         }
         if (callback) {
             if (typeof callback == "function") {
@@ -119,12 +119,12 @@ WeixinAPI.prototype = {
 
         var data = this.mergerData(this.dataHolder[action]);
         if (action == "shareTimeline") {
-            var title = data.title;
-            data.title = data.desc || title;
-            data.desc = title;
+            var title = data["title"] || data["desc"];
+            data["title"] = data["desc"] || title;
+            data["desc"] = title;
         }
         var callback = this.callbackHolder[action];
-        var readyCallback = callback ? callback.ready : null;
+        var readyCallback = callback ? callback["ready"] : null;
 
         var Me = this;
 
@@ -171,12 +171,12 @@ WeixinAPI.prototype = {
 
         var data = this.mergerData(this.dataHolder[action]);
         if (action == "shareTimeline") {
-            var title = data.title || data.desc;
-            data.title = data.desc || title;
-            data.desc = title;
+            var title = data["title"] || data["desc"];
+            data["title"] = data["desc"] || title;
+            data["desc"] = title;
         }
         var callback = this.callbackHolder[action];
-        var readyCallback = callback ? callback.ready : null;
+        var readyCallback = callback ? callback["ready"] : null;
 
         var Me = this;
 
@@ -251,16 +251,16 @@ WeixinAPI.prototype = {
         if (!curSrc || !srcList || srcList.length == 0) {
             return;
         }
-        WeixinJSBridge.invoke('imagePreview', {
-            'current': curSrc,
-            'urls': srcList
+        WeixinJSBridge.invoke("imagePreview", {
+            "current": curSrc,
+            "urls": srcList
         });
     },
 
     getNetworkType: function(callback) {
-        if (callback && typeof callback == 'function') {
-            WeixinJSBridge.invoke('getNetworkType', {}, function(resp) {
-                var type = resp.err_msg;
+        if (callback && typeof callback == "function") {
+            WeixinJSBridge.invoke("getNetworkType", {}, function(resp) {
+                var type = resp["err_msg"];
                 //  network_type:wifi     wifi
                 //  network_type:edge     edge
                 //  network_type:wwan     2G/3G
@@ -280,19 +280,19 @@ WeixinAPI.prototype = {
     },
 
     showOptionMenu: function() {
-        WeixinJSBridge.call('showOptionMenu');
+        WeixinJSBridge.call("showOptionMenu");
     },
 
     hideOptionMenu: function() {
-        WeixinJSBridge.call('hideOptionMenu');
+        WeixinJSBridge.call("hideOptionMenu");
     },
 
     showToolbar: function() {
-        WeixinJSBridge.call('showToolbar');
+        WeixinJSBridge.call("showToolbar");
     },
 
     hideToolbar: function() {
-        WeixinJSBridge.call('hideToolbar');
+        WeixinJSBridge.call("hideToolbar");
     },
 
     closeWindow: function() {
@@ -307,8 +307,8 @@ WeixinAPI.prototype = {
         for (var p in data) {
             _data[p] = data[p];
         }
-        _data.title === undefined && (_data.title = _data.desc);
-        _data.desc === undefined && (_data.desc = _data.title);
+        _data["title"] === undefined && (_data["title"] = _data["desc"]);
+        _data["desc"] === undefined && (_data["desc"] = _data["title"]);
         return _data;
     },
 
