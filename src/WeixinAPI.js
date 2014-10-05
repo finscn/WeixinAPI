@@ -10,6 +10,10 @@ var WeixinAPI = function(options) {
     }
 };
 
+WeixinAPI.isInWeixin = function() {
+    return /MicroMessenger/i.test(navigator.userAgent);
+};
+
 WeixinAPI.prototype = {
     constructor: WeixinAPI,
 
